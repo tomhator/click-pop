@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://dqy8teir6swp0"]
+
+[ext_resource type="Script" uid="uid://bm72es2ty3dmq" path="res://Scenes/Game/Game.gd" id="1_rdw05"]
+[ext_resource type="PackedScene" uid="uid://b4kyu7u60fa2j" path="res://Scenes/Monster/Monster.tscn" id="2_gwu2e"]
+
+[node name="Game" type="Node" unique_id=1385318072]
+script = ExtResource("1_rdw05")
+
+[node name="Monster" parent="." unique_id=89140643 instance=ExtResource("2_gwu2e")]
+position = Vector2(104, 104)
+scale = Vector2(3.425, 3.425)
