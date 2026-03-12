@@ -1,0 +1,9 @@
+[gd_resource type="LabelSettings" format=3 uid="uid://bk7i4t12oayax"]
+
+[ext_resource type="FontFile" uid="uid://ubtqrsot0uyk" path="res://Assets/Poco.ttf" id="1_xff86"]
+
+[resource]
+font = ExtResource("1_xff86")
+font_size = 36
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)

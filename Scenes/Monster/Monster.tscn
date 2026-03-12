@@ -49,6 +49,7 @@ size = Vector2(21, 17)
 
 [node name="Monster" type="Area2D" unique_id=89140643]
 texture_filter = 1
+scale = Vector2(3, 3)
 script = ExtResource("1_5kmi8")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1937055448]
