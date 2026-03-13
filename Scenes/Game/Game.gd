@@ -9,12 +9,18 @@ const MARGIN = 50
 
 @onready var enemy_spawner: Node2D = $EnemySpawner
 @onready var spawn_timer: Timer = $EnemySpawner/SpawnTimer
-@onready var game_over_label: Label = $GameOverLabel
-@onready var enemy_count: Label = $EnemyCount
 
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("ui_close_dialog"):
-		get_tree().reload_current_scene()
+var SPAWNIG_TIME: float = 1.5
+
+@onready var enemy_count: Label = $CanvasLayer/EnemyCount
+@onready var game_over_label: Label = $CanvasLayer/GameOverLabel
+@onready var restart_button: Button = $CanvasLayer/RestartButton
+
+func reset_global() -> void:
+	SPAWNIG_TIME = 1.5
+	Global.current_enemy = 0
+	Global.enemy_killed = 0
+	
 
 func spawn_monster() -> void:
 	var new_monster = MONSTER.instantiate()
@@ -34,24 +40,35 @@ func _on_click_monster() -> void:
 	if Global.current_enemy <= 0:
 		Global.current_enemy = 0
 	enemy_count.text = "%04d" % Global.current_enemy
-	
+	Global.enemy_killed += 1
+	if Global.enemy_killed % 5 == 0:
+		SPAWNIG_TIME -= 0.5
+		if SPAWNIG_TIME < 0.5:
+			SPAWNIG_TIME = 0.3
+		spawn_timer.wait_time = SPAWNIG_TIME
+		print(spawn_timer.wait_time)
 
 func game_over() -> void:
 	if Global.current_enemy >= Global.MAX_EMEMY:
 		get_tree().paused = true
 		game_over_label.show()
+		restart_button.show()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	reset_global()
+	get_tree().paused = false
+	spawn_timer.wait_time = SPAWNIG_TIME
 	Input.set_custom_mouse_cursor(CROOSHAIR)
 	enemy_count.text = '0000'
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
 
 
 func _on_spawn_timer_timeout() -> void:
 	spawn_monster()
 	game_over()
+
+
+func _on_restart_button_pressed() -> void:
+	get_tree().paused = false
+	get_tree().reload_current_scene()

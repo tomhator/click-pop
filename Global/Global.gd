@@ -1,8 +1,8 @@
 extends Node
 
 const MAX_EMEMY = 20
-
 var current_enemy = 0
+var enemy_killed = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

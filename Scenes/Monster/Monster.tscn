@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cd34lrgcgtu67" path="res://Scenes/Monster/Monster.gd" id="1_5kmi8"]
 [ext_resource type="Texture2D" uid="uid://c6dnuwrphmhki" path="res://Assets/enemies.png" id="1_o74e3"]
+[ext_resource type="AudioStream" uid="uid://c8sej5o1mprrx" path="res://Assets/hurt-a.ogg" id="3_40lkt"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4bei1"]
 atlas = ExtResource("1_o74e3")
@@ -45,7 +46,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5kmi8"]
-size = Vector2(21, 17)
+size = Vector2(23.333334, 17)
 
 [node name="Monster" type="Area2D" unique_id=89140643]
 texture_filter = 1
@@ -54,17 +55,18 @@ script = ExtResource("1_5kmi8")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1937055448]
 sprite_frames = SubResource("SpriteFrames_4bei1")
-animation = &"Dead"
+animation = &"Idle"
 autoplay = "Idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1763808996]
-position = Vector2(0.5, 3.5)
+position = Vector2(0.66666675, 4.8333335)
 shape = SubResource("RectangleShape2D_5kmi8")
-
-[node name="Dead" type="AudioStreamPlayer" parent="." unique_id=766367720]
 
 [node name="Timer" type="Timer" parent="." unique_id=1043930704]
 wait_time = 2.5
 autostart = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=768991741]
+stream = ExtResource("3_40lkt")
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
